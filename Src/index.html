@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Assignment 4 - Intro to Meshes</title>
+
+
+<!-- ROSS: In your vertex and fragment shader, you will want to see what uniform options there are and how to use varying.  HINT: you will need a matrix (mat4) plus some vectors (you have to look that up or pay attention to me in class).  You need to edit both the vertex-shader and the framgent-shader here, nothing else.-->
+
+<!-- Code below is the vertex-shader ---------------------- -->
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec3 vPosition;
+attribute vec2 vTexCoord;
+attribute vec3 vNormal;
+
+uniform mat4 MVMatrix;
+uniform mat4 PMatrix;
+uniform mat4 CMatrix;
+uniform mat3 NMatrix;
+
+varying vec2 fTexCoord;
+varying vec4 mvPosition;
+
+varying vec3 fNormal;
+
+void
+main()
+{
+	mvPosition = MVMatrix*vec4(vPosition, 1.0);
+    gl_Position = PMatrix*CMatrix*mvPosition;
+    fTexCoord = vTexCoord;
+    fNormal = NMatrix*vNormal;
+}
+</script>
+
+
+<!-- Code below is the fragment-shader -------------------- -->
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision highp float;
+
+varying vec2 fTexCoord;
+varying vec4 mvPosition;
+
+varying vec3 fNormal;
+
+uniform vec3 cameraLocation;
+
+uniform vec3 lightLocation;
+uniform vec3 ambientColor;
+uniform vec3 diffuseColor;
+uniform vec3 specularColor;
+uniform float specularIntensity;
+
+uniform sampler2D sampler;
+
+void
+main()
+{
+	bool testNormals = false;
+	vec3 lightDirection = normalize(lightLocation - mvPosition.xyz);
+	vec3 normal = normalize(fNormal);
+
+    vec3 eyeDirection = normalize(cameraLocation - mvPosition.xyz);
+    vec3 reflectionDirection = reflect(-lightDirection, normal);
+
+    float diffuseWeighting = max(dot(normal, lightDirection), 0.0);
+    float specularWeighting = 0.0;
+    if(diffuseWeighting > 0.0) {
+    	specularWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), specularIntensity);
+    }
+    
+
+	vec3 fLightWeighting = ambientColor + (diffuseColor * diffuseWeighting) + (specularColor * specularWeighting);
+
+
+
+	//SIMMONS: depending on the state of our toggle button, switch the texture
+	vec4 textureColor = texture2D(sampler, vec2(fTexCoord.s, fTexCoord.t));
+	gl_FragColor = vec4(textureColor.rgb * fLightWeighting, textureColor.a);
+	if(testNormals) {
+		gl_FragColor.r = abs(fNormal[0]);
+		gl_FragColor.g = abs(fNormal[1]);
+		gl_FragColor.b = abs(fNormal[2]);
+	}
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="cubeGL.js"></script>
+<script type="text/javascript" src="Shapes.js"></script>
+<script type="text/javascript" src="Turns.js"></script>
+</head>
+
+<body>
+<canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="650" height="650">
+<!-- <canvas id="gl-canvas" width="1080" height="1080"> -->
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+<h2>Controls</h2>
+<h3>Turns</h3>
+<span>R = Turn right face clockwise</span></br>
+<span>L = Turn left face clockwise</span></br>
+<span>U = Turn up face clockwise</span></br>
+<span>D = Turn down face clockwise</span></br>
+<span>F = Turn front face clockwise</span></br>
+<span>B = Turn back face clockwise</span></br></br>
+
+<span>Shift + R = Turn right face counterclockwise</span></br>
+<span>Shift + L = Turn left face counterclockwise</span></br>
+<span>Shift + U = Turn up face counterclockwise</span></br>
+<span>Shift + D = Turn down face counterclockwise</span></br>
+<span>Shift + F = Turn front face counterclockwise</span></br>
+<span>Shift + B = Turn back face counterclockwise</span></br>
+
+<h3>Rotations</h3>
+<span>X = Rotate on X axis clockwise</span></br>
+<span>Y = Rotate on Y axis clockwise</span></br>
+<span>Z = Rotate on Z axis clockwise</span></br></br>
+<span>Shift + X = Rotate on X axis counterclockwise</span></br>
+<span>Shift + Y = Rotate on Y axis counterclockwise</span></br>
+<span>Shift + Z = Rotate on Z axis counterclockwise</span></br>
+</body>
+</html>
