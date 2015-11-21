@@ -6,7 +6,8 @@ var gl;
 var shaderProgram;
 
 // All textures are loaded into this array
-var textures = [];
+var cubeTexture;
+var skyTexture;
 
 // Global vars that hold all info for each shape
 var world;
@@ -116,7 +117,7 @@ function handleLoadedTexture(t) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.bindTexture(gl.TEXTURE_2D, null);
-    textures.push(t);
+    // textures.push(t);
 }
 
 // Takes a shape object, binds all buffers and sets the texture
@@ -154,7 +155,7 @@ window.onload = function init()
     initTextures();
 
     // Create a sphere to be our world
-    world = makeObject(sphere(1, 180), 0);
+    world = makeObject(sphere(1, 180), skyTexture);
 
     // Set the locations of each sticker color in the texture image
     var texGREEN = [0,1/3, 0,2/3, 1/3,1/3, 1/3,2/3];
@@ -167,7 +168,7 @@ window.onload = function init()
 
     // Push and unused cubie into the array. Only used to make the numbering of
     // cubies a little easier
-    cubies.push(makeObject(cube(1), 1));
+    cubies.push(makeObject(cube(1), cubeTexture));
 
     // The numbering of the cubies is as follows, viewing the cube from the top:
     //
@@ -188,114 +189,114 @@ window.onload = function init()
     // texture coordinates and then pushing them to the cubie array.
     var c1 = cube(1);
     c1.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texYELLOW, texBLACK];
-    cubies.push(makeObject(c1, 1));
+    cubies.push(makeObject(c1, cubeTexture));
 
     var c2 = cube(1);
     c2.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c2, 1));
+    cubies.push(makeObject(c2, cubeTexture));
 
     var c3 = cube(1);
     c3.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c3, 1));
+    cubies.push(makeObject(c3, cubeTexture));
     
     var c4 = cube(1);
     c4.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texYELLOW, texBLACK];
-    cubies.push(makeObject(c4, 1));
+    cubies.push(makeObject(c4, cubeTexture));
 
     var c5 = cube(1);
     c5.texCoords = [texBLACK, texBLACK, texBLACK, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c5, 1));
+    cubies.push(makeObject(c5, cubeTexture));
 
     var c6 = cube(1);
     c6.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c6, 1));
+    cubies.push(makeObject(c6, cubeTexture));
     
     var c7 = cube(1);
     c7.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texYELLOW, texBLACK];
-    cubies.push(makeObject(c7, 1));
+    cubies.push(makeObject(c7, cubeTexture));
 
     var c8 = cube(1);
     c8.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c8, 1));
+    cubies.push(makeObject(c8, cubeTexture));
 
     var c9 = cube(1);
     c9.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texYELLOW, texBLACK];
-    cubies.push(makeObject(c9, 1));
+    cubies.push(makeObject(c9, cubeTexture));
     
     // Create cubies for the middle layer of the cube, giving them the appropriate
     // texture coordinates and then pushing them to the cubie array.
     var c10 = cube(1);
     c10.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texBLACK, texBLACK];
-    cubies.push(makeObject(c10, 1));
+    cubies.push(makeObject(c10, cubeTexture));
 
     var c11 = cube(1);
     c11.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texBLACK, texBLACK];
-    cubies.push(makeObject(c11, 1));
+    cubies.push(makeObject(c11, cubeTexture));
 
     var c12 = cube(1);
     c12.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texBLACK, texBLACK];
-    cubies.push(makeObject(c12, 1));
+    cubies.push(makeObject(c12, cubeTexture));
     
     var c13 = cube(1);
     c13.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texBLACK, texBLACK];
-    cubies.push(makeObject(c13, 1));
+    cubies.push(makeObject(c13, cubeTexture));
 
     // Center of the cube needs no texture coords
-    cubies.push(makeObject(cube(1), 1));
+    cubies.push(makeObject(cube(1), cubeTexture));
 
     var c15 = cube(1);
     c15.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texBLACK, texBLACK];
-    cubies.push(makeObject(c15, 1));
+    cubies.push(makeObject(c15, cubeTexture));
     
     var c16 = cube(1);
     c16.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texBLACK, texBLACK];
-    cubies.push(makeObject(c16, 1));
+    cubies.push(makeObject(c16, cubeTexture));
 
     var c17 = cube(1);
     c17.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texBLACK, texBLACK];
-    cubies.push(makeObject(c17, 1));
+    cubies.push(makeObject(c17, cubeTexture));
 
     var c18 = cube(1);
     c18.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texBLACK, texBLACK];
-    cubies.push(makeObject(c18, 1));
+    cubies.push(makeObject(c18, cubeTexture));
     
     // Create cubies for the bottom layer of the cube, giving them the appropriate
     // texture coordinates and then pushing them to the cubie array.
     var c19 = cube(1);
     c19.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texBLACK, texWHITE];
-    cubies.push(makeObject(c19, 1));
+    cubies.push(makeObject(c19, cubeTexture));
 
     var c20 = cube(1);
     c20.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c20, 1));
+    cubies.push(makeObject(c20, cubeTexture));
 
     var c21 = cube(1);
     c21.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c21, 1));
+    cubies.push(makeObject(c21, cubeTexture));
     
     var c22 = cube(1);
     c22.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texBLACK, texWHITE];
-    cubies.push(makeObject(c22, 1));
+    cubies.push(makeObject(c22, cubeTexture));
 
     var c23 = cube(1);
     c23.texCoords = [texBLACK, texBLACK, texBLACK, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c23, 1));
+    cubies.push(makeObject(c23, cubeTexture));
 
     var c24 = cube(1);
     c24.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c24, 1));
+    cubies.push(makeObject(c24, cubeTexture));
     
     var c25 = cube(1);
     c25.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texBLACK, texWHITE];
-    cubies.push(makeObject(c25, 1));
+    cubies.push(makeObject(c25, cubeTexture));
 
     var c26 = cube(1);
     c26.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c26, 1));
+    cubies.push(makeObject(c26, cubeTexture));
 
     var c27 = cube(1);
     c27.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texBLACK, texWHITE];
-    cubies.push(makeObject(c27, 1));
+    cubies.push(makeObject(c27, cubeTexture));
 
     // Move all of the cubies into their individual positions
     cubies[1].localMatrix = translate(-1, 1, -1);
@@ -508,7 +509,7 @@ function drawShape(object) {
     gl.vertexAttribPointer(shaderProgram.textureAttribute, 2, gl.FLOAT, false, 0, 0 );
     
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, textures[object.texture]);
+    gl.bindTexture(gl.TEXTURE_2D, object.texture);
     gl.uniform1i(shaderProgram.sampler, 0);
 
     gl.drawElements(gl.TRIANGLES, object.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -535,7 +536,7 @@ function render() {
     var ambientLight = vec3(0.4, 0.4, 0.4);
     var diffuseLight = vec3(0.8, 0.8, 0.8);
     var specularLight = vec3(0.5, 0.5, 0.5);
-    var specularIntensity = 50.0;
+    var specularIntensity = 100.0;
     
     // Pass uniforms for camera, projection, lighting, etc.
     gl.uniformMatrix4fv(shaderProgram.cameraMatrixUniform, false, flatten(camera));
