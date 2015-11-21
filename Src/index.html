@@ -2,12 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-<title>Assignment 4 - Intro to Meshes</title>
+<title>WebGL Cube</title>
 
-
-<!-- ROSS: In your vertex and fragment shader, you will want to see what uniform options there are and how to use varying.  HINT: you will need a matrix (mat4) plus some vectors (you have to look that up or pay attention to me in class).  You need to edit both the vertex-shader and the framgent-shader here, nothing else.-->
-
-<!-- Code below is the vertex-shader ---------------------- -->
 <script id="vertex-shader" type="x-shader/x-vertex">
 attribute vec3 vPosition;
 attribute vec2 vTexCoord;
@@ -33,8 +29,6 @@ main()
 }
 </script>
 
-
-<!-- Code below is the fragment-shader -------------------- -->
 <script id="fragment-shader" type="x-shader/x-fragment">
 
 precision highp float;
@@ -73,9 +67,6 @@ main()
 
 	vec3 fLightWeighting = ambientColor + (diffuseColor * diffuseWeighting) + (specularColor * specularWeighting);
 
-
-
-	//SIMMONS: depending on the state of our toggle button, switch the texture
 	vec4 textureColor = texture2D(sampler, vec2(fTexCoord.s, fTexCoord.t));
 	gl_FragColor = vec4(textureColor.rgb * fLightWeighting, textureColor.a);
 	if(testNormals) {
@@ -95,8 +86,8 @@ main()
 </head>
 
 <body>
-<canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="650" height="650">
-<!-- <canvas id="gl-canvas" width="1080" height="1080"> -->
+<!-- <canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="650" height="650"> -->
+<canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="1080" height="1080">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
 <h2>Controls</h2>
