@@ -87,7 +87,7 @@ main()
 
 <body>
 <!-- <canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="650" height="650"> -->
-<canvas style = "float: left; margin-right: 15px;" id="gl-canvas" width="1080" height="1080">
+<canvas style = "float: left; margin-right: 15px;" id="gl-canvas">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
 <h2>Controls</h2>
@@ -114,4 +114,9 @@ Oops ... your browser doesn't support the HTML5 canvas element
 <span>Shift + Y = Rotate on Y axis counterclockwise</span></br>
 <span>Shift + Z = Rotate on Z axis counterclockwise</span></br>
 </body>
+<script>
+document.getElementById("gl-canvas").width = window.innerHeight - 40;
+document.getElementById("gl-canvas").height = window.innerHeight - 40;
+</script>
 </html>
+

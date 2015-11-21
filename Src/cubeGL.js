@@ -1,11 +1,10 @@
-//ROSS: My Global Variables
 var canvas;
 var gl;
 
-//ROSS: This keeps track of all the shader code
+// This keeps track of all the shader code
 var shaderProgram;
 
-// All textures are loaded into this array
+// All textures
 var cubeTexture;
 var skyTexture;
 
@@ -117,7 +116,6 @@ function handleLoadedTexture(t) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.bindTexture(gl.TEXTURE_2D, null);
-    // textures.push(t);
 }
 
 // Takes a shape object, binds all buffers and sets the texture
@@ -150,6 +148,7 @@ function makeObject(shape, texID) {
 window.onload = function init()
 {
     canvas = document.getElementById( "gl-canvas" );
+    
     initGL(canvas);
     init_Shaders();
     initTextures();
@@ -333,10 +332,20 @@ window.onload = function init()
     // Specify function to handle keyboard input
     document.onkeydown = handleKeyDown;   
 
+    // Function to resize the canvas if the window resizes
+    window.onresize = resizeWindow;
+
+
     gl.clearColor( 0.9, 0.9, 0.9, 1.0 );
     gl.enable(gl.DEPTH_TEST);
     render();
 };
+
+function resizeWindow() {
+    document.getElementById("gl-canvas").width = window.innerHeight - 40;
+    document.getElementById("gl-canvas").height = window.innerHeight - 40;
+    gl.viewport( 0, 0, canvas.width, canvas.height );
+}
 
 function handleKeyDown(event) {
     // Check to see if we are "locked". This happens if we are in the middle of a turn animation
