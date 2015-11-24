@@ -540,12 +540,13 @@ function render() {
     projection = perspective( 50, 1.0, 1, 2000 );
 
     // Set lighting values and positions
-    var lightLoc = vec3(7, 4, 8);
+    //var lightLoc = vec3(7, 4, 8);
+    var lightLoc = [-Math.sin(radians(tick/15)) * 22, 3, -Math.cos(radians(tick/15)) * 22];
     var cameraLoc = eye;
-    var ambientLight = vec3(0.4, 0.4, 0.4);
+    var ambientLight = vec3(0.5, 0.5, 0.5);
     var diffuseLight = vec3(0.8, 0.8, 0.8);
     var specularLight = vec3(0.5, 0.5, 0.5);
-    var specularIntensity = 100.0;
+    var specularIntensity = 50.0;
     
     // Pass uniforms for camera, projection, lighting, etc.
     gl.uniformMatrix4fv(shaderProgram.cameraMatrixUniform, false, flatten(camera));
@@ -558,7 +559,7 @@ function render() {
     gl.uniform1f(shaderProgram.specularIntensityUniform, specularIntensity);
 
     // Draw the outer sphere (the world) and give it a little animation
-    world.localMatrix = betterMult(betterRotate(0, tick/20, 0), scalem(20, 20, 20));
+    world.localMatrix = betterMult(betterRotate(0, tick/15, 0), scalem(20, 20, 20));
     drawShape(world);
 
     // Go through all of the cubies and determine if they are in our cubiesToTurn array.

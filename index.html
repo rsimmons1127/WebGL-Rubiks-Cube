@@ -86,32 +86,41 @@ main()
 </head>
 
 <body>
-<canvas style = "float: left; margin-right: 15px;" id="gl-canvas">
-Oops ... your browser doesn't support the HTML5 canvas element
-</canvas>
-<h2>Controls</h2>
-<h3>Turns</h3>
-<span>R = Turn right face clockwise</span></br>
-<span>L = Turn left face clockwise</span></br>
-<span>U = Turn up face clockwise</span></br>
-<span>D = Turn down face clockwise</span></br>
-<span>F = Turn front face clockwise</span></br>
-<span>B = Turn back face clockwise</span></br></br>
+	<div id = "header">
+		
+	</div>
+	<div id = "main">
+		<div id = "canvas">
+			<canvas style = "float: left; margin-right: 15px;" id="gl-canvas">
+				Oops ... your browser doesn't support the HTML5 canvas element
+			</canvas>
+		</div>
+		<div id = "controls">
+			<h2>Controls</h2>
+			<h3>Turns</h3>
+			<span>R = Turn right face clockwise</span></br>
+			<span>L = Turn left face clockwise</span></br>
+			<span>U = Turn up face clockwise</span></br>
+			<span>D = Turn down face clockwise</span></br>
+			<span>F = Turn front face clockwise</span></br>
+			<span>B = Turn back face clockwise</span></br></br>
 
-<span>Shift + R = Turn right face counterclockwise</span></br>
-<span>Shift + L = Turn left face counterclockwise</span></br>
-<span>Shift + U = Turn up face counterclockwise</span></br>
-<span>Shift + D = Turn down face counterclockwise</span></br>
-<span>Shift + F = Turn front face counterclockwise</span></br>
-<span>Shift + B = Turn back face counterclockwise</span></br>
+			<span>Shift + R = Turn right face counterclockwise</span></br>
+			<span>Shift + L = Turn left face counterclockwise</span></br>
+			<span>Shift + U = Turn up face counterclockwise</span></br>
+			<span>Shift + D = Turn down face counterclockwise</span></br>
+			<span>Shift + F = Turn front face counterclockwise</span></br>
+			<span>Shift + B = Turn back face counterclockwise</span></br>
 
-<h3>Rotations</h3>
-<span>X = Rotate on X axis clockwise</span></br>
-<span>Y = Rotate on Y axis clockwise</span></br>
-<span>Z = Rotate on Z axis clockwise</span></br></br>
-<span>Shift + X = Rotate on X axis counterclockwise</span></br>
-<span>Shift + Y = Rotate on Y axis counterclockwise</span></br>
-<span>Shift + Z = Rotate on Z axis counterclockwise</span></br>
+			<h3>Rotations</h3>
+			<span>X = Rotate on X axis clockwise</span></br>
+			<span>Y = Rotate on Y axis clockwise</span></br>
+			<span>Z = Rotate on Z axis clockwise</span></br></br>
+			<span>Shift + X = Rotate on X axis counterclockwise</span></br>
+			<span>Shift + Y = Rotate on Y axis counterclockwise</span></br>
+			<span>Shift + Z = Rotate on Z axis counterclockwise</span>
+		</div>
+	</div>
 </body>
 <script>
 document.getElementById("gl-canvas").width = window.innerHeight - 40;
