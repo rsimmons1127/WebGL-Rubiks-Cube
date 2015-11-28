@@ -218,7 +218,7 @@ window.onload = function init()
     c8.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texYELLOW, texBLACK];
     cubies.push(makeObject(c8, cubeTexture));
 
-    var c9 = cube(1);
+    var c9 = roundedCube(1, .3);
     c9.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texYELLOW, texBLACK];
     cubies.push(makeObject(c9, cubeTexture));
     
