@@ -1,8 +1,3 @@
-//SIMMONS: helper file to create shapes. For each shape we pass
-// back the vertices, indexes, normals, and texture coords. All
-// of these can be overwritten on the fly as needed.
-
-
 function plane(width, height)  {
     var shape = [];
     shape.vertices = [
@@ -74,11 +69,6 @@ function roundedCube(size, radius, sample) {
     for(i = 0; i <= 90; i += 90/sample) {
         shape.vertices.push(size/2, vec3(Math.cos(radians(i%360)) * radius, Math.sin(radians(i%360)) * radius));
         shape.vertices.push(-size/2, vec3(Math.cos(radians(i%360)) * radius, Math.sin(radians(i%360)) * radius));
-
-
-
-
-
         shape.normals.push(vec3(Math.cos(radians(90)-coneAngle)*Math.cos(radians(i%360)),Math.sin(radians(90)-coneAngle),Math.cos(radians(90)-coneAngle)*Math.sin(radians(i%360))));
         shape.normals.push(vec3(Math.cos(radians(90)-coneAngle)*Math.cos(radians(i%360)),Math.sin(radians(90)-coneAngle),Math.cos(radians(90)-coneAngle)*Math.sin(radians(i%360))));
     }
@@ -156,8 +146,6 @@ function prism(w, h, l) {
     return shape;
 }
 
-//SIMMONS: I tried very hard to get this on my own and got close, but couldn't. The below code
-// is from http://learningwebgl.com/blog/?p=1253 and changed slightly
 function sphere(radius, sample)  {
     var latitudeBands = sample;
     var longitudeBands = sample;
